@@ -1,0 +1,30 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+:root {
+	--primaryColor: #75c2f6;
+	--secondaryColor: #60d394;
+	--optionalColor: #333333;
+}
+
+.primary_color {
+	color: var(--primaryColor);
+}
+.primary_bg {
+	background: var(--primaryColor);
+}
+.secondary_color {
+	color: var(--secondaryColor);
+}
+.secondary_bg {
+	background: var(--secondaryColor);
+}
+.bg_dark {
+	background: var(--optionalColor);
+}
+/* .navHover:hover {
+	background: var(--primaryColor);
+} */
