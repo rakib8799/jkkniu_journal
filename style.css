@@ -28,3 +28,11 @@
 /* .navHover:hover {
 	background: var(--primaryColor);
 } */
+
+.package-item img {
+	transition: 0.5s;
+}
+
+.package-item:hover img {
+	transform: scale(1.1);
+}

@@ -1,33 +1,50 @@
-<!-- Core JS -->
-<!-- build:js assets/vendor/js/core.js -->
-<script src="../admin/assets/vendor/libs/jquery/jquery.js"></script>
-<script src="../admin/assets/vendor/libs/popper/popper.js"></script>
-<script src="../admin/assets/vendor/js/bootstrap.js"></script>
-<script src="../admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+<footer class="main-footer w-100 position-absolute bottom-0 start-0 py-2 card_header">
+  <div class="container-fluid">
+    <div class="row text-center gy-3">
+      <div class="col-sm-12 text-sm-start">
+        <p class="mb-0 text-sm text-light text-center"><b>@Powered By: <i>Mehedi Khan Rakib</i>, Dept of CSE</b></p>
+      </div>
 
-<script src="../admin/assets/vendor/js/menu.js"></script>
-<!-- endbuild -->
+    </div>
+  </div>
+</footer>
+</div>
 
-<!-- Vendors JS -->
-<!-- <script src="../admin/assets/vendor/libs/apex-charts/apexcharts.js"></script> -->
-
-<!-- Main JS -->
-<script src="../admin/assets/js/main.js"></script>
-
-<!-- Page JS -->
-<!-- <script src="../admin/assets/js/dashboards-analytics.js"></script> -->
-
-<!-- Place this tag in your head or just before your close body tag. -->
-<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-
-<script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap5.min.js"></script>
+<!-- JavaScript files-->
+<script src="../framework/bootstrap.bundle.min.js"></script>
+<script src="js/Chart.min.js"></script>
+<script src="js/just-validate.min.js"></script>
+<script src="js/choices.min.js"></script>
+<script src="js/OverlayScrollbars.min.js"></script>
+<script src="js/charts-home.js"></script>
+<!-- Main File-->
+<script src="js/front.js"></script>
 <script>
-  $(document).ready(function() {
-    $('#table').DataTable();
-  });
+  // ------------------------------------------------------- //
+  //   Inject SVG Sprite -
+  //   see more here
+  //   https://css-tricks.com/ajaxing-svg-sprite/
+  // ------------------------------------------------------ //
+  function injectSvgSprite(path) {
+
+    var ajax = new XMLHttpRequest();
+    ajax.open("GET", path, true);
+    ajax.send();
+    ajax.onload = function(e) {
+      var div = document.createElement("div");
+      div.className = 'd-none';
+      div.innerHTML = ajax.responseText;
+      document.body.insertBefore(div, document.body.childNodes[0]);
+    }
+  }
+  // this is set to BootstrapTemple website as you cannot
+  // inject local SVG sprite (using only 'icons/orion-svg-sprite.svg' path)
+  // while using file:// protocol
+  // pls don't forget to change to your domain :)
+  injectSvgSprite('https://bootstraptemple.com/files/icons/orion-svg-sprite.svg');
 </script>
-<script async defer src="https://buttons.github.io/buttons.js"></script>
+<!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
 </body>
 
 </html>

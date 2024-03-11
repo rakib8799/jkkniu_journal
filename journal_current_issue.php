@@ -31,7 +31,7 @@
                 <div class="issue-details col-md-8">
 
                     <div class="description">
-                        Jahangirnagar University Journal of Government and Politics
+                        Jatiya Kabi Kazi Nazrul Islam University Journal of Government and Politics
                     </div>
 
 

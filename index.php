@@ -1,5 +1,3 @@
-<?php require_once("database/connection.php") ?>
-
 <?php include_once('linker.php') ?>
 
 <body>
@@ -7,15 +5,20 @@
         <?php include_once('header.php') ?>
     </header>
 
-    <a style="cursor:pointer;" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"><img style="width: 2vw;" class="to-top position-fixed bottom-0 end-0" src="./Images/arrow-up.jpg"></a>
+    <section class="HomepageSection m-0" id="NewsScroller">
+        <?php include_once('news_scroller.php') ?>
+    </section>
 
-    <section class="HomepageSection mt-5" id="AboutEvent">
+
+    <section class="HomepageSection mt-4" id="AboutEvent">
         <?php include_once('about_event.php') ?>
     </section>
 
     <section class="HomepageSection mt-5" id="Journal">
         <?php include_once('journals.php') ?>
     </section>
+
+    <a style="cursor:pointer;" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"><img style="width: 2vw;" class="to-top position-fixed bottom-0 end-0" src="./Images/arrow-up.jpg"></a>
 
 
     <footer data-aos="fade-up">

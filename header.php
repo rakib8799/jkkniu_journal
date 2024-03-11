@@ -1,3 +1,5 @@
+<?php require_once("database/connection.php"); ?>
+
 <nav class="navbar navbar-expand-lg bg_dark position-sticky top-0">
     <div class="container">
         <a class="navbar-brand" href="index.php"><img src="Images/jkkniu_logo.svg" alt="JKKNIU logo" style="width: 55px;"><span class="text-white"> Nazrul University Journal of Science and Engineering</span>
@@ -12,7 +14,7 @@
                     <a class="nav-link fw-bold text-white navHover" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fw-bold text-white navHover" href="login.php">Register</a>
+                    <a class="nav-link fw-bold text-white navHover" href="registration.php">Register</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link fw-bold text-white navHover" href="login.php">Login</a>

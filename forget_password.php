@@ -1,4 +1,3 @@
-<?php require_once('database/connection.php') ?>
 <?php include_once('linker.php') ?>
 <?php include_once('mail_sending.php') ?>
 <a href="index.php" class="btn btn-primary m-auto d-flex justify-content-center text-center">Return to Home</a>
@@ -42,7 +41,7 @@ if (isset($_POST['submit_email'])) {
                 </div>
 
                 <div class="">
-                    <button type="submit" class="btn btn-primary" name="submit_email">
+                    <button type="submit" class="btn btn-primary" name="submit_email" disabled>
                         Submit
                     </button>
                 </div>

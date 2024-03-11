@@ -1,5 +1,3 @@
-<?php require_once("database/connection.php") ?>
-
 <?php include_once('linker.php') ?>
 
 <body>
@@ -16,7 +14,7 @@
             <section id="cta" class="bg-light shadow-sm">
                 <div class="container">
                     <div class="col-lg-12">
-                        <p class="text-justify"> ASIAN STUDIES: Jahangirnagar University Journal of Government and Politics (ISSN-0253-3375) is published annually in June by the Department of Government and Politics, Jahangirngar University, Savar, Dhaka-1342, Bangladesh. </p>
+                        <p class="text-justify">Journal of Journalism and Media, a blind-reviewed academic journal of the Department of Journalism and Media Studies, Jahangirnagar University is published every year.</p>
                     </div>
                 </div>
             </section><!-- End Cta Section -->
@@ -44,7 +42,7 @@
                         </div>
 
                         <p class="current_issue_title lead">
-                            Vol. 41 (2022)
+                            Vol. 4 No. 4 (2022): Journal of Journalism and Media
                         </p>
                         <div class="container issue-toc">
 
@@ -59,7 +57,7 @@
                                 <div class="issue-details col-md-8">
 
                                     <div class="description">
-                                        Jahangirnagar University Journal of Government and Politics
+                                        Jatiya Kabi Kazi Nazrul Islam University Journal of Government and Politics
                                     </div>
 
 
@@ -85,7 +83,7 @@
                                         <div class="issue-details col-md-8 text-center card-body">
 
                                             <div class="description card-text">
-                                                Jahangirnagar University Journal of Government and Politics
+                                                Journal of Journalism and Media , a blind-reviewed academic journal of the Department of Journalism and Media Studies, Jatiya Kabi Kazi Nazrul Islam University, is published every year. It publishes research-oriented papers on media, journalism and communication, photo essays, and critical review of films and recently published books. Papers recommended by reviewers are generally accepted for publication.
                                             </div>
 
 
@@ -93,7 +91,7 @@
                                                 <strong>
                                                     Published:
                                                 </strong>
-                                                25-07-2023
+                                                01-07-2023
                                             </p>
                                         </div>
                                     </div>
@@ -368,7 +366,7 @@
                                 </section>
                             </div><!-- .sections -->
                         </div> <!--.container.issue-toc -->
-                        <a href="https://journals.juniv.edu/index.php/as/issue/archive" class="btn btn-primary read-more mt-5">
+                        <a href="archives.php" class="btn btn-primary read-more mt-5">
                             View All Issues
                             <span class="glyphicon glyphicon-chevron-right"></span>
                         </a>

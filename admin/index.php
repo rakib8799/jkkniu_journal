@@ -1,76 +1,73 @@
 <?php include("admin_header.php"); ?>
-<div class="container-fluid mt-3 text-center">
-    <h3>Admin Dashboard</h3>
-    <div class="row mt-5">
-        <div class="col-md-3">
-            <div class="card shadow p-3 mb-5">
-                <h6>Add Speaker</h6>
-                <a href="add_speaker_details.php">Add</a>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card shadow p-3 mb-5">
-                <h6>View Speakers</h6>
-                <a href="show_all_speakers.php">View</a>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card shadow p-3 mb-5">
-                <h6>Add Committee Member</h6>
-                <a href="add_committee_details.php">Add</a>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card shadow p-3 mb-5">
-                <h6>View Committee Members</h6>
-                <a href="committee_details.php">View</a>
-            </div>
-        </div>
-    </div>
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-12 col-12">
+            <div class="card mt-2 shadow p-3 mb-5 bg-body rounded">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 col-12 mt-2">
+                            <div class="card-body bg-primary text-white" style="border-radius: 8px;">
+                                <h5><i class="fa-solid fa-folder-open m-1"></i> New Papers</h5>
+                                <?php
+                                // select paper information
+                                $select_from_new_paper = "SELECT * FROM `new_paper` WHERE `paper_status` = '1' AND `count`='1'";
+                                $run_select_from_new_paper = mysqli_query($conn, $select_from_new_paper);
+                                $num_new_paper = mysqli_num_rows($run_select_from_new_paper);
+                                ?>
+                                <a href="new_papers_m_e.php" class="home_anker">Total Papers: <?php echo $num_new_paper ?></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-12 mt-2">
+                            <div class="card-body bg-secondary text-white" style="border-radius: 8px;">
+                                <h5><i class="fa-solid fa-check-double m-1"></i> Revision Papers</h5>
+                                <?php
+                                // select paper information
+                                $select_from_new_paper = "SELECT * FROM `new_paper` WHERE `paper_status` = '1' AND `count` > '1'";
+                                $run_select_from_new_paper = mysqli_query($conn, $select_from_new_paper);
+                                $num_new_paper = mysqli_num_rows($run_select_from_new_paper);
+                                ?>
+                                <a href="revision_papers_m_e.php" class="home_anker">Total Papers: <?php echo $num_new_paper ?></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-12 mt-2">
+                            <div class="card-body bg-primary text-white" style="border-radius: 8px;">
+                                <h5><i class="fa-regular fa-calendar-check m-1"></i> Review Done Papers</h5>
+                                <?php
+                                // select paper information
+                                $select_from_new_paper = "SELECT * FROM `new_paper` WHERE `paper_status` = '6'";
+                                $run_select_from_new_paper = mysqli_query($conn, $select_from_new_paper);
+                                $num_new_paper = mysqli_num_rows($run_select_from_new_paper);
+                                ?>
+                                <a href="review_done_papers_m_e.php" class="home_anker">Total Papers: <?php echo $num_new_paper ?></a>
+                            </div>
+                        </div>
 
-    <div class="row">
-        <div class="col-md-3">
-            <div class="card shadow p-3 mb-5">
-                <h6>Add Important Date</h6>
-                <a href="add_important_dates.php">Add</a>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card shadow p-3 mb-5">
-                <h6>View Important Dates</h6>
-                <a href="show_all_dates.php">View</a>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card shadow p-3 mb-5">
-                <h6>Add Call For Paper</h6>
-                <a href="add_call_for_paper.php">Add</a>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card shadow p-3 mb-5">
-                <h6>View Call For Papers</h6>
-                <a href="show_all_call_for_papers.php">View</a>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3">
-            <div class="card shadow p-3 mb-5">
-                <h6>View Extended Abstract</h6>
-                <a href="show_all_papers.php">View</a>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card shadow p-3 mb-5">
-                <h6>View Authors</h6>
-                <a href="view_authors.php">View</a>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card shadow p-3 mb-5">
-                <h6>View Payment Form</h6>
-                <a href="view_payment_form.php">View</a>
+                        <div class="col-lg-3 col-md-4 col-12 mt-2">
+                            <div class="card-body bg-success text-white" style="border-radius: 8px;">
+                                <h5><i class="fa-solid fa-square-check m-1"></i> Accepted Papers</h5>
+                                <?php
+                                // select paper information
+                                $select_from_new_paper = "SELECT * FROM `new_paper` WHERE `paper_status` = '100'";
+                                $run_select_from_new_paper = mysqli_query($conn, $select_from_new_paper);
+                                $num_new_paper = mysqli_num_rows($run_select_from_new_paper);
+                                ?>
+                                <a href="accepted_papers_m_e.php" class="home_anker">Total Papers: <?php echo $num_new_paper ?></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-12 mt-2">
+                            <div class="card-body bg-danger text-white" style="border-radius: 8px;">
+                                <h5><i class="fa-solid fa-rectangle-xmark m-1"></i> Rejected Papers</h5>
+                                <?php
+                                // select paper information
+                                $select_from_new_paper = "SELECT * FROM `new_paper` WHERE `paper_status` = '99'";
+                                $run_select_from_new_paper = mysqli_query($conn, $select_from_new_paper);
+                                $num_new_paper = mysqli_num_rows($run_select_from_new_paper);
+                                ?>
+                                <a href="rejected_papers_m_e.php" class="home_anker">Total Papers: <?php echo $num_new_paper ?></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -1,288 +1,91 @@
 <?php
 require_once("../database/connection.php");
 if (!isset($_SESSION['admin_id'])) {
-  header('location: login.php');
-  ob_end_flush();
+?>
+  <script>
+    window.location = "../index.php";
+  </script>
+<?php
+  exit();
 }
 ?>
-<?php include_once("admin_linker.php") ?>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Welcome to Nazrul Journal</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <!-- Google fonts - Roboto -->
+  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"> -->
+
+  <!-- Custom Scrollbar-->
+  <link rel="stylesheet" href="css/OverlayScrollbars.min.css">
+  <!-- theme stylesheet-->
+  <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+  <link rel="stylesheet" href="../framework/bootstrap.min.css">
+  <link rel="stylesheet" href="../framework/all.min.css">
+  <link rel="stylesheet" href="css/main.css">
+  <Link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <!-- Favicon-->
+
+</head>
 
 <body>
-  <!-- Layout wrapper -->
-  <div class="layout-wrapper layout-content-navbar">
-    <div class="layout-container">
-      <!-- Menu -->
-      <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-        <div class="app-brand demo">
-          <a href="index.php" class="app-brand-link">
-            <!-- <img src="../Images/ICTBJ Logo.jpg" class="img-fluid" width="40vw" alt=""> -->
-            <span class="demo menu-text fw-bolder fs-3 m-auto">Admin Panel</span>
-          </a>
 
-          <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
-            <i class="bx bx-chevron-left bx-sm align-middle"></i>
-          </a>
+  <!-- Side Navbar -->
+  <nav class="side-navbar">
+    <!-- Sidebar Header    -->
+    <div class="sidebar-header d-flex align-items-center justify-content-center p-3 mb-3" style="user-select:none">
+      <!-- User Info-->
+      <div class="sidenav-header-inner text-center"><img class="img-fluid rounded-circle avatar mb-3" src="img/user.png" alt="person">
+        <h4>Admin</h4>
+        <a class="nav-link text-sm mb-0 text-muted" href="index.php">Home</a>
+
+      </div>
+      <!-- Small Brand information, appears on minimized sidebar-->
+      <a class="brand-small text-center text-decoration-none" href="index.php">
+        <p class="h1 m-0 text-light">AD</p>
+      </a>
+    </div>
+    <!-- Sidebar Navigation Menus-->
+    <p class="text-uppercase text-gray-500 text-sm fw-bold heading text-center">Links
+      <hr>
+    </p>
+    <ul class="list-unstyled">
+      <li class="sidebar-item active"><a class="sidebar-link fs-5" href="index.php"> <i class="fa-solid fa-house m-1"></i> Home</a></li>
+      <li class="sidebar-item"><a class="sidebar-link fs-5" href="new_papers_m_e.php"> <i class="fa-solid fa-folder-open m-1"></i> New Papers </a></li>
+      <li class="sidebar-item"><a class="sidebar-link fs-5" href="revision_papers_m_e.php"> <i class="fa-solid fa-check-double m-1"></i> Revision Papers</a></li>
+      <li class="sidebar-item"><a class="sidebar-link fs-5" href="review_done_papers_m_e.php"> <i class="fa-regular fa-calendar-check m-1"></i> Rvw Dn Papers </a></li>
+      <li class="sidebar-item"><a class="sidebar-link fs-5" href="accepted_papers_m_e.php"> <i class="fa-solid fa-square-check m-1"></i> Acptd Papers </a></li>
+      <li class="sidebar-item"><a class="sidebar-link fs-5" href="rejected_papers_m_e.php"> <i class="fa-solid fa-rectangle-xmark m-1"></i> Rjctd Papers </a></li>
+      <li class="sidebar-item"><a class="sidebar-link fs-5" href="all_papers_m_e.php"> <i class="fa-solid fa-signal m-1"></i> All Papers </a></li>
+      <li class="sidebar-item"><a class="sidebar-link fs-5" href="profile_m_e.php"> <i class="fa-solid fa-id-card m-1"></i> Profile </a></li>
+      <li class="sidebar-item"><a class="sidebar-link fs-5" href="view_volume.php"> <i class="fa-solid fa-id-card m-1"></i> Volume </a></li>
+      <li class="sidebar-item"><a class="sidebar-link fs-5" href="view_issue.php"> <i class="fa-solid fa-id-card m-1"></i> Issue </a></li>
+
+    </ul>
+  </nav>
+  <div class="page">
+    <!-- navbar-->
+    <header class="header sticky-top">
+      <nav class="navbar">
+        <div class="container-fluid">
+          <div class="d-flex align-items-center justify-content-between w-100">
+            <div class="d-flex align-items-center">
+              <a class=" btn btn-light d-flex align-items-center justify-content-center p-2" id="toggle-btn" href="#"><span class="navbar-toggler-icon"></span></a>
+              <a class="navbar-brand ms-2">
+                <div class="brand-text d-none d-md-inline-block text-capitalize letter-spacing-0 text-white fs-5"> Welcome <span class="fw-bolder fs-4"><?php echo $_SESSION['admin_name'] ?></span> </div>
+              </a>
+            </div>
+            <ul class="nav-menu mb-0 list-unstyled d-flex flex-md-row align-items-md-center">
+              <!-- Log out-->
+              <li class="nav-item"><a class="btn btn-danger p-1 a_hover" href="admin_logout.php"> <span class="d-none d-sm-inline-block me-2">Logout</span><i class="fa-solid fa-right-from-bracket"></i></a></li>
+            </ul>
+          </div>
         </div>
-
-        <div class="menu-inner-shadow"></div>
-
-        <ul class="menu-inner py-1">
-          <!-- Dashboard -->
-          <li class="menu-item active">
-            <a href="index.php" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-home-circle"></i>
-              <div data-i18n="Analytics">Dashboard</div>
-            </a>
-          </li>
-
-          <!-- View News Scroll -->
-          <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons bx bx-layout"></i>
-              <div data-i18n="News Scroll">News Scroll</div>
-            </a>
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="add_news_scroller.php" class="menu-link">
-                  <div data-i18n="Add News Scroller">Add News Scroller</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="view_news_scroller.php" class="menu-link">
-                  <div data-i18n="View News Scroll">View News Scroll</div>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <!-- View Authors -->
-          <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons bx bx-layout"></i>
-              <div data-i18n="Manage Authors">Manage Authors</div>
-            </a>
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="view_authors.php" class="menu-link">
-                  <div data-i18n="View Authors">View Authors</div>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <!-- Extended Abstract -->
-          <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons bx bx-layout"></i>
-              <div data-i18n="Extended Abstract">Extended Abstract</div>
-            </a>
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="view_paper.php" class="menu-link">
-                  <div data-i18n="Extended Abstract Details">Extended Abstract Details</div>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <!-- Speaker -->
-          <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons bx bx-layout"></i>
-              <div data-i18n="Speaker">Speaker</div>
-            </a>
-
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="add_speaker_details.php" class="menu-link">
-                  <div data-i18n="Add Speaker">Add Speaker</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="view_speaker_details.php" class="menu-link">
-                  <div data-i18n="All Speakers">All Speakers</div>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <!-- Committee -->
-          <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons bx bx-layout"></i>
-              <div data-i18n="Committee">Committee</div>
-            </a>
-
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="add_committee_details.php" class="menu-link">
-                  <div data-i18n="Add Members">Add Member</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="view_committee_details.php" class="menu-link">
-                  <div data-i18n="All Members">All Members</div>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <!-- Important Dates -->
-          <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons bx bx-layout"></i>
-              <div data-i18n="Important Dates">Important Dates</div>
-            </a>
-
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="add_date.php" class="menu-link">
-                  <div data-i18n="Add Dates">Add Dates</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="view_date.php" class="menu-link">
-                  <div data-i18n="All Dates">All Dates</div>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <!-- Call For Paper -->
-          <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons bx bx-layout"></i>
-              <div data-i18n="Call For Paper">Call For Paper</div>
-            </a>
-
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="add_call_for_paper.php" class="menu-link">
-                  <div data-i18n="Add Call For Paper">Add Call For Paper</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="view_call_for_paper.php" class="menu-link">
-                  <div data-i18n="All Call For Papers">All Call For Papers</div>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <!-- Manage Payment Form -->
-          <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons bx bx-layout"></i>
-              <div data-i18n="Manage Payment Form">Manage Payment Form</div>
-            </a>
-
-            <ul class="menu-sub">
-              <!-- <li class="menu-item">
-                <a href="add_payment_form.php" class="menu-link">
-                  <div data-i18n="Add Payment Form">Add Payment Form</div>
-                </a>
-              </li> -->
-              <li class="menu-item">
-                <a href="view_payment_form.php" class="menu-link">
-                  <div data-i18n="View Payment Forms">View Payment Forms</div>
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </aside>
-      <!-- / Menu -->
-
-      <!-- Layout container -->
-      <div class="layout-page">
-        <!-- Navbar -->
-
-        <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
-          <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
-            <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-              <i class="bx bx-menu bx-sm"></i>
-            </a>
-          </div>
-
-          <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-            <!-- Search -->
-            <!-- <div class="navbar-nav align-items-center">
-              <div class="nav-item d-flex align-items-center">
-                <i class="bx bx-search fs-4 lh-0"></i>
-                <input type="text" class="form-control border-0 shadow-none" placeholder="Search..." aria-label="Search..." />
-              </div>
-            </div> -->
-            <!-- /Search -->
-
-            <ul class="navbar-nav flex-row align-items-center ms-auto">
-              <!-- Place this tag where you want the button to render. -->
-              <!-- <li class="nav-item lh-1 me-3">
-                <a class="github-button" href="https://github.com/themeselection/sneat-html-admin-template-free" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
-              </li> -->
-
-              <!-- User -->
-              <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                  <div class="avatar avatar-online">
-                    <img src="../Images/logo.png" alt class="w-px-40 h-auto rounded-circle" />
-                  </div>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end">
-                  <li>
-                    <a class="dropdown-item" href="#">
-                      <div class="d-flex">
-                        <div class="flex-shrink-0 me-3">
-                          <div class="avatar avatar-online">
-                            <img src="../Images/logo.png" alt class="w-px-40 h-auto rounded-circle" />
-                          </div>
-                        </div>
-                        <div class="flex-grow-1">
-                          <?php
-                          $select_from_new_paper = "SELECT * FROM admin_information WHERE admin_id='$_SESSION[admin_id]'";
-                          $run_select_from_new_paper = mysqli_query($conn, $select_from_new_paper);
-                          $serial_no = 1;
-                          if (mysqli_num_rows($run_select_from_new_paper) > 0) {
-                            $row = mysqli_fetch_assoc($run_select_from_new_paper);
-                            extract($row);
-                          ?>
-                            <span class="fw-semibold d-block"><?php echo $admin_name ?></span>
-                          <?php
-                          }
-                          ?>
-                          <small class="text-muted">Admin</small>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <div class="dropdown-divider"></div>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="edit_admin_profile.php?profile_id=<?php echo $_SESSION['admin_id'] ?>">
-                      <i class="bx bx-user me-2"></i>
-                      <span class="align-middle">My Profile</span>
-                    </a>
-                  </li>
-                  <!-- <li>
-                    <a class="dropdown-item" href="#">
-                      <i class="bx bx-cog me-2"></i>
-                      <span class="align-middle">Settings</span>
-                    </a>
-                  </li> -->
-                  <li>
-                    <div class="dropdown-divider"></div>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="admin_logout.php">
-                      <i class="bx bx-power-off me-2"></i>
-                      <span class="align-middle">Log Out</span>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <!--/ User -->
-            </ul>
-          </div>
-        </nav>
-
-        <!-- / Navbar -->
+      </nav>
+    </header>

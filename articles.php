@@ -1,5 +1,3 @@
-<?php require_once("database/connection.php") ?>
-
 <?php include_once('linker.php') ?>
 
 <body>
@@ -27,7 +25,7 @@
                     </li>
                     <li class="breadcrumb-item">
                         <a href="https://journals.juniv.edu/index.php/as/issue/view/43" class="text-dark text-decoration-none">
-                            Vol. 41 (2022)
+                            Vol. 4 No. 4 (2022): Journal of Journalism and Media
                         </a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
@@ -43,14 +41,14 @@
 
                     <header>
                         <h1 class="page-header">
-                            Content of Accord and Durability of Peace
-                            <small>
+                            Impact of Social Media in Mobilizing the 2018 Road Safety Movement in Bangladesh
+                            <!-- <small>
                                 A Comparative Study of Nagaland and Chittagong Hill Tracts
-                            </small>
+                            </small> -->
                         </h1>
                     </header>
 
-                    <div class="row">
+                    <div class="row mt-5">
 
                         <section class="article-sidebar col-md-4">
 
@@ -76,18 +74,16 @@
                             </div>
 
                             <div class="list-group">
-
                                 <div class="list-group-item date-published">
                                     <strong>Published:</strong>
-                                    Jul 25, 2023
+                                    Jul 1, 2023
                                 </div>
-
 
                                 <div class="list-group-item keywords">
                                     <strong> Keywords:</strong>
                                     <div class="">
                                         <span class="value">
-                                            Civil war, insurgency, peace-pact, Nagaland, Chittagong Hill Tracts </span>
+                                            Road Safety Movement 2018, Social Media, Protest Logic, Critical Discourse Analysis, Social Activism</span>
                                     </div>
                                 </div>
                             </div>
@@ -101,17 +97,17 @@
 
                                 <div class="authors">
                                     <div class="author">
-                                        <strong>Tareq Hossain Khan</strong>
+                                        <strong>Nishat Parvez</strong>
                                         <div class="article-author-affilitation">
-                                            Associate Professor, Department of Political Science, Jagannath University, Dhaka
+                                            Jahangirnagar University
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="article-summary" id="summary">
+                                <div class="article-summary mt-5" id="summary">
                                     <h2>Abstract</h2>
                                     <div class="article-abstract">
-                                        <p>Signing a peace agreement is a daunting job for the belligerents since they have to compromise many demands in a negotiated settlement; it is even more problematic to hold the rebel groups under the banner of a peace accord. Scholars have emphasized the importance of third party presence, peacekeeping of the United Nations, restructuring of security services, economic development, etc., in maintaining the stability of the settlement. However, we do not have a clear idea about how the content and quality of the peace treaty contribute to the durability of the peace. This article examines how the peace accord's content, provisions, and incentives hold the disputing parties within the agreed framework. This article uses the Nagaland and Chittagong Hill Tracts (CHT) agreement as cases to investigate the research aim through a structured-focused comparison with content analysis of official documents. The findings suggest that the Naga rebels returned to the battlefield within five years after signing the Nagaland accord because it did not provide any incentive to the insurgents and the Naga community. On the contrary, despite some tensions and controversy, the CHT agreement has survived because of its liberal content that incorporated power-sharing with rebel leaders.</p>
+                                        <p>This article focuses on the impact of social media in mobilizing the road safety movement. On July 29, 2018, two college students died in a horrific road accident in Dhaka. After their death, school and college students across the country started protesting the corruption and mischievousness of the transport sector of Bangladesh. Social media solely mobilized this movement. The study observed how social media helped young students organize and spread their agenda through a successful protest. Using the content analysis method, some of the most shared posts (pictures, videos, words) from Facebook and YouTube were analyzed to understand the impact of social media. By analyzing the posts through Critical Discourse Analysis theory and Protest Logic theory, this study found that it is necessary to engage in activism both in social media and in real life to spread a protest throughout the country.</p>
                                     </div>
                                 </div>
 
@@ -120,9 +116,9 @@
 
                             </section><!-- .article-main -->
 
-                            <section class="article-more-details">
+                            <section class="article-more-details mt-5">
 
-                                <h2 class="sr-only">Article Details</h2>
+                                <h2>Article Details</h2>
 
 
 
@@ -132,7 +128,7 @@
                                     </div>
                                     <div class="panel-body">
                                         <a class="title text-decoration-none" href="https://journals.juniv.edu/index.php/as/issue/view/43">
-                                            Vol. 41 (2022)
+                                            Vol. 4 No. 4 (2022): Journal of Journalism and Media
                                         </a>
 
                                     </div>
@@ -147,10 +143,15 @@
                                     </div>
                                 </div>
 
-
-
-
-
+                                <div class="panel panel-default section">
+                                    <div class="panel-heading">
+                                        Author Biography
+                                    </div>
+                                    <div class="panel-body">
+                                        <h4>Nishat Parvez, Jahangirnagar University</h4>
+                                        <p>Nishat Parvez: Assistant Professor, Department of Journalism and Media Studies, Jahangirnagar University, Savar, Dhaka-1342, Bangladesh.Email: <i>nishatjms@juniv.edu</i></p>
+                                    </div>
+                                </div>
 
                             </section><!-- .article-details -->
                         </div><!-- .col-md-8 -->

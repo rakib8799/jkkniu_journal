@@ -1,148 +1,286 @@
-<?php require_once('database/connection.php') ?>
 <?php include_once('linker.php') ?>
-<a href="index.php" class="btn btn-primary m-auto d-flex justify-content-center text-center">Return to Home</a>
-<?php include_once 'validate_server_side.php'; ?>
-<?php include_once('mail_sending.php') ?>
 
-<?php
-if (isset($_POST['signup'])) {
-    $matched = 0;
-    if (isset($_POST['captcha']) && ($_POST['captcha'] != "")) {
-        // Validation: Checking entered captcha code with the generated captcha code
-        if (strcmp($_SESSION['captcha'], $_POST['captcha']) != 0) {
-            // Note: the captcha code is compared case insensitively.
-            // if you want case sensitive match, check above with strcmp()
-            $status = "<p class='text-danger fw-bold text-center fs-5 mt-3'>
-        Entered captcha code does not match! 
-        Kindly try again.</p>";
-            $matched = 0;
-        } else {
-            $status = "<p class='text-success fw-bold text-center fs-5 mt-3'>Your captcha code is matched.</p>";
-            $matched = 1;
-        }
+<body>
+    <header>
+        <?php include_once('header.php') ?>
+    </header>
 
-        if ($matched === 1) {
+    <section>
+        <div class="container-fluid my-5 d-flex justify-content-center">
+            <div class="col-md-10">
+                <form action="" method="POST">
+                    <div class="card rounded m-auto px-5 shadow">
+                        <div class="card-header card_header text-center">
+                            <h4><i class="fa-solid fa-id-card "></i> Register As <i>Author/Reviewer</i></h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row justify-content-center mt-3 text-dark ">
+                                <div class="col-lg-4 col-md-4 col-12 ">
+                                    <label for="" class="mb-2"><b>Enter Your Name:</b></label>
+                                    <br>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user"></i></span>
+                                        <input class="form-control" type="text" name="name" placeholder="Enter Your Name" value="<?php if (isset($_POST['name'])) {
+                                                                                                                                        echo $_POST['name'];
+                                                                                                                                    } ?>" required>
+                                    </div>
 
-            $data = $_POST;
-            // print_r($data);
-            // echo "<br><br>";
-            $arr = validateData($conn, $data);
-            // print_r($arr);
-            extract($arr);
-            // $hash_password = md5($password);
-            if ($password === $confirm_password) {
-                try {
-                    $encrypted_password = password_hash($password, PASSWORD_DEFAULT);
+                                </div>
 
-                    $verification_code = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
+                                <div class="col-lg-4 col-md-4 col-12">
+                                    <label for="" class="mb-2"><b>Please Select Designation:</b></label>
+                                    <br>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-image-portrait"></i></span>
+                                        <select class="form-control" name="designation" id="" required>
+                                            <option value="">Please Select Designation</option>
+                                            <option <?php if (isset($_POST['designation']) && $_POST['designation'] == "Professor") echo "selected"; ?>>Professor</option>
+                                            <option <?php if (isset($_POST['designation']) && $_POST['designation'] == "Associate Professor") echo "selected"; ?>>Associate Professor</option>
+                                            <option <?php if (isset($_POST['designation']) && $_POST['designation'] == "Assistant Professor") echo "selected"; ?>>Assistant Professor</option>
+                                            <option <?php if (isset($_POST['designation']) && $_POST['designation'] == "Lecturer") echo "selected"; ?>>Lecturer</option>
+                                        </select>
+                                    </div>
+                                </div>
 
-                    $sql = "SELECT * FROM author_information WHERE author_email = '$email'";
-                    $result = mysqli_query($conn, $sql);
-                    $count = mysqli_num_rows($result);
-                    if ($count > 0) {
-                        echo "<p class='text-danger fw-bold text-center fs-5 mt-3'>Email Already Exists</p>";
-                    } else {
-                        $insert_data = "INSERT INTO `author_information`(`author_name`,`author_email`, `author_contact_no`,`author_password`,`verification_code`, `email_verified_at`) VALUES ('$name','$email','$contact','$encrypted_password','$verification_code',NULL)";
-                        $insert_query = mysqli_query($conn, $insert_data);
-                        if ($insert_query) {
-                            // $_SESSION['verification_code'] = $verification_code;
-                            $receiver = $email;
-                            $subject = "Email verification";
-                            $body = '<p>Your verification code is: <b style="font-size: 30px;">' . $verification_code . '</b></p>';
-                            $send_mail = send_mail($receiver, $subject, $body);
-                            // echo ($receiver . " " . " " . $subject . " " . $body);
+                                <div class="col-lg-4 col-md-4 col-12">
+                                    <label for="" class="text-dark mb-2"> <b>Enter University Name:</b> </label>
+                                    <br>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-building-columns"></i></span>
+                                        <input class="form-control" type="text" name="university_name" placeholder="Enter University Name" value="<?php if (isset($_POST['university_name'])) {
+                                                                                                                                                        echo $_POST['university_name'];
+                                                                                                                                                    } ?>" required>
+                                    </div>
+                                </div>
+                            </div>
 
-                            echo '<script>
-                                        alert("Email verification code is sent to your email address");
-                                        </script>';
-                            header("Location: email-verification.php?email=" . $email);
-                            ob_end_flush();
-                        } else {
-                            echo "<p class='text-danger fw-bold text-center fs-5 mt-3'>Data is not inserted yet!</p>";
-                        }
-                    }
-                } catch (Exception $e) {
-                    echo "<p class='text-danger fw-bold text-center fs-5 mt-3'>Email is not sent yet!</p>";
-                }
-            } else {
-                echo "<p class='text-danger fw-bold text-center fs-5 mt-3'>Both passwords are not Matched.</p>";
+
+                            <div class="row justify-content-center mt-3">
+
+                                <div class="col-lg-4 col-md-4 col-12">
+                                    <label for="" class="text-dark mb-2"> <b>Enter Email:</b> </label>
+                                    <br>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-envelope"></i></span>
+                                        <input class="form-control" type="email" name="email" placeholder="Enter Your Email" value="
+                                    <?php if (isset($_POST['email'])) {
+                                        echo $_POST['email'];
+                                    } ?>" required>
+                                    </div>
+                                    <p id="email" class="fw-bolder bg-warning text-dark text-center mt-1" style="display:none"></p>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-12">
+                                    <label for="" class="text-dark mb-2"> <b>Enter Contact No:</b> </label>
+                                    <br>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-phone"></i></span>
+                                        <input class="form-control" type="text" name="contact_no" placeholder="Enter Your Contact No" value="<?php if (isset($_POST['contact_no'])) {
+                                                                                                                                                    echo $_POST['contact_no'];
+                                                                                                                                                } ?>" required>
+                                    </div>
+                                    <p id="contact_no" class="fw-bolder bg-warning text-dark text-center mt-1" style="display:none"></p>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-12">
+                                    <label for="" class="text-dark mb-2"> <b>Country:</b> </label>
+                                    <br>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-flag"></i></span>
+                                        <?php
+                                        $countries = array("Afghanistan", "Albania", "Algeria", "American Samoa", "Andorra", "Angola", "Anguilla", "Antarctica", "Antigua and Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia and Herzegowina", "Botswana", "Bouvet Island", "Brazil", "British Indian Ocean Territory", "Brunei Darussalam", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central African Republic", "Chad", "Chile", "China", "Christmas Island", "Cocos (Keeling) Islands", "Colombia", "Comoros", "Congo", "Congo, the Democratic Republic of the", "Cook Islands", "Costa Rica", "Cote d'Ivoire", "Croatia (Hrvatska)", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands (Malvinas)", "Faroe Islands", "Fiji", "Finland", "France", "France Metropolitan", "French Guiana", "French Polynesia", "French Southern Territories", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guadeloupe", "Guam", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Heard and Mc Donald Islands", "Holy See (Vatican City State)", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran (Islamic Republic of)", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea, Democratic People's Republic of", "Korea, Republic of", "Kuwait", "Kyrgyzstan", "Lao, People's Democratic Republic", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libyan Arab Jamahiriya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia, The Former Yugoslav Republic of", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Martinique", "Mauritania", "Mauritius", "Mayotte", "Mexico", "Micronesia, Federated States of", "Moldova, Republic of", "Monaco", "Mongolia", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Niue", "Norfolk Island", "Northern Mariana Islands", "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Pitcairn", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", "Russian Federation", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Seychelles", "Sierra Leone", "Singapore", "Slovakia (Slovak Republic)", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Georgia and the South Sandwich Islands", "Spain", "Sri Lanka", "St. Helena", "St. Pierre and Miquelon", "Sudan", "Suriname", "Svalbard and Jan Mayen Islands", "Swaziland", "Sweden", "Switzerland", "Syrian Arab Republic", "Taiwan, Province of China", "Tajikistan", "Tanzania, United Republic of", "Thailand", "Togo", "Tokelau", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks and Caicos Islands", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "United States Minor Outlying Islands", "Uruguay", "Uzbekistan", "Vanuatu", "Venezuela", "Vietnam", "Virgin Islands (British)", "Virgin Islands (U.S.)", "Wallis and Futuna Islands", "Western Sahara", "Yemen", "Yugoslavia", "Zambia", "Zimbabwe");
+                                        ?>
+                                        <select name="country" id="" class="form-select" required>
+                                            <option value="">Please Select Country</option>
+                                            <?php
+                                            foreach ($countries as $key => $value) :
+                                                echo '<option value="' . $value . '">' . $value . '</option>'; //close your tags!!
+                                            endforeach;
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-center mt-3 text-dark ">
+                                <div class="col-lg-4 col-md-4 col-12 ">
+                                    <label for="" class="mb-2"><b>Author/Reviewer</b></label>
+                                    <br>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-image-portrait"></i></span>
+                                        <select class="form-control" name="select_author_reviewer_asso_editor" id="" required>
+                                            <option value="">Please Select</option>
+                                            <option <?php if (isset($_POST['select_author_reviewer_asso_editor']) && $_POST['select_author_reviewer_asso_editor'] == "Author") echo "selected"; ?>>Author</option>
+                                            <option <?php if (isset($_POST['select_author_reviewer_asso_editor']) && $_POST['select_author_reviewer_asso_editor'] == "Reviewer") echo "selected"; ?>>Reviewer</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-12">
+                                    <label for="" class="mb-2"><b>Password:</b></label>
+                                    <br>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-lock"></i></span>
+                                        <input class="form-control" type="password" name="password" placeholder="Enter Password" value="<?php if (isset($_POST['password'])) {
+                                                                                                                                            echo $_POST['password'];
+                                                                                                                                        } ?>" required>
+                                    </div>
+                                    <p id="password" class="fw-bolder bg-warning text-dark text-center mt-1" style="display:none"></p>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-12">
+                                    <label for="" class="mb-2"><b>Confirm Password:</b></label>
+                                    <br>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-lock"></i></span>
+                                        <input class="form-control" type="password" name="confirm_password" placeholder="Enter Password Again" value="<?php if (isset($_POST['confirm_password'])) {
+                                                                                                                                                            echo $_POST['confirm_password'];
+                                                                                                                                                        } ?>" required>
+                                    </div>
+                                    <p id="confirm_password" class="fw-bolder bg-warning text-dark text-center mt-1" style="display:none"></p>
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-center mt-5">
+                                <div class="col-lg-4 col-md-6 col-12">
+                                    <div class="input-group mt-2">
+                                        <input class="form-control btn btn-success fw-bold" type="submit" value="Register" name="submit">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-1 text-center">
+                                <p class="text-dark">Already Registered? <a href="login.php" class="text-decoration-none fw-bolder">Login now.</a> </p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!-- <script>
+            function refreshCaptcha() {
+                var img = document.images['captcha_image'];
+                img.src = img.src.substring(
+                    0, img.src.lastIndexOf("?")
+                ) + "?rand=" + Math.random() * 1000;
             }
+        </script> -->
+                <!-- <script src="validate_client_side.js"></script> -->
+            </div>
+        </div>
+    </section>
+    <footer data-aos="fade-up">
+        <?php include_once('footer.php') ?>
+    </footer>
+
+    <?php
+    if (isset($_POST['submit'])) {
+        $name = mysqli_real_escape_string($conn, $_POST['name']);
+        $designation = mysqli_real_escape_string($conn, $_POST['designation']);
+        $university_name = mysqli_real_escape_string($conn, $_POST['university_name']);
+        $email = mysqli_real_escape_string($conn, $_POST['email']);
+        $contact_no = mysqli_real_escape_string($conn, $_POST['contact_no']);
+        $country = mysqli_real_escape_string($conn, $_POST['country']);
+        $select_author_reviewer_asso_editor = mysqli_real_escape_string($conn, $_POST['select_author_reviewer_asso_editor']);
+        $password = mysqli_real_escape_string($conn, $_POST['password']);
+        $confirm_password = mysqli_real_escape_string($conn, $_POST['confirm_password']);
+
+        // ki hisabe register korte chacche tar jonno if else dewa
+        if ($select_author_reviewer_asso_editor == "Author") {
+            $person = "author";
+        } else if ($select_author_reviewer_asso_editor == "Reviewer") {
+            $person = "reviewer";
         } else {
-            echo $status;
+            $person = "associative_editor";
+        }
+        // table name
+        $person_table_name = $person . "_information";
+
+        // jei table e data entry korbe tar column er name
+        $person_column_user_name = $person . "_name";
+        $person_column_designation = $person . "_designation";
+        $person_column_university_name = $person . "_university_name";
+        $person_column_email = $person . "_email";
+        $person_column_contact_no = $person . "_contact_no";
+        $person_column_country = $person . "_country";
+        $person_column_password = $person . "_password";
+
+        // Query to check whether email exists or not
+        $select_to_validate_email = "SELECT count(id) as `total_id` FROM `$person_table_name` WHERE `$person_column_email` = '$email'";
+        $run_select_to_validate_email = mysqli_query($conn, $select_to_validate_email);
+        $num_rows_email = mysqli_fetch_assoc($run_select_to_validate_email);
+
+        // Query To check whether contact_no already exists or not.
+        $select_to_validate_contact_no = "SELECT count(id) as `total_id` FROM `$person_table_name` WHERE `$person_column_contact_no` = '$contact_no'";
+        $run_select_to_validate_contact_no = mysqli_query($conn, $select_to_validate_contact_no);
+        $num_rows_contact_no = mysqli_fetch_assoc($run_select_to_validate_contact_no);
+
+        // Start Of Validation
+        if ($num_rows_email['total_id'] > 0) {
+    ?>
+            <script>
+                document.getElementById('email').style = "display:block";
+                document.getElementById('email').innerHTML = "!!Email Already Exists";
+            </script>
+        <?php
+            exit();
+        } else if ($num_rows_contact_no['total_id'] > 0) {
+        ?>
+            <script>
+                document.getElementById('contact_no').style = "display:block";
+                document.getElementById('contact_no').innerHTML = "!!Contact Already Exists";
+            </script>
+        <?php
+            exit();
+        } else if (strlen($password) < 8 || strlen($confirm_password) < 8) {
+        ?>
+            <script>
+                document.getElementById('password').style = "display:block";
+                document.getElementById('password').innerHTML = "!!Password Must Be Greater Than 8 Characters";
+
+                document.getElementById('confirm_password').style = "display:block";
+                document.getElementById('confirm_password').innerHTML = "!!Password Must Be Greater Than 8 Characters";
+            </script>
+        <?php
+            exit();
+        } else if ($password != $confirm_password) {
+        ?>
+            <script>
+                document.getElementById('password').style = "display:block";
+                document.getElementById('password').innerHTML = "!!Password And Confirm Password Does Not Match";
+
+                document.getElementById('confirm_password').style = "display:block";
+                document.getElementById('confirm_password').innerHTML = "!!Password And Confirm Password Does Not Match";
+            </script>
+        <?php
+            exit();
+        } else {
+            // If all validation passes Hash the password;
+            $password = md5($password);
+        }
+        // End Of Validation
+
+        // If all validation Passes now insert using Prepared Statement
+        $insert_into_person_table = "INSERT INTO `$person_table_name` (`$person_column_user_name`,`$person_column_designation`,`$person_column_university_name`,`$person_column_email`,`$person_column_contact_no`,`$person_column_country`,`$person_column_password`) VALUES (?,?,?,?,?,?,?)";
+
+        if ($stmt = mysqli_prepare($conn, $insert_into_person_table)) {
+            mysqli_stmt_bind_param($stmt, "sssssss", $name, $designation, $university_name, $email, $contact_no, $country, $password);
+            mysqli_stmt_execute($stmt);
+        ?>
+            <script>
+                window.alert("Registration Successfully Completed");
+                window.location = "login.php";
+            </script>
+    <?php
         }
     }
-}
-//  else {
-//     echo 'Form is not submitted yet!';
-// }
-?>
+    ?>
 
-<div class="container-fluid my-5 d-flex justify-content-center">
-    <div class="col-md-5 col-12">
-        <div class="card rounded m-auto py-4 px-5 shadow">
-            <form action="" method="post" onsubmit="return formData()">
-                <h3 class="text-center">Sign Up</h3>
-                <div class="mb-3">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" name="name" id="name" placeholder="Enter Your Name" onkeyup="validateName()" required />
-                    <span id="name_err"></span>
-                </div>
+    <!-- Here we hook our AOS JS file  -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <!-- Activate AOS Library -->
+    <script>
+        AOS.init();
+    </script>
+</body>
 
-                <div class="mb-3">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" name="email" id="email" placeholder="Enter Your Email Address" onkeyup="validateEmail()" required />
-                    <span id="email_err"></span>
-                </div>
-                <div class="mb-3">
-                    <label for="contact">Contact No.</label>
-                    <input type="text" class="form-control" name="contact" id="contact" placeholder="Enter Your Contact Number" onkeyup="validateContact()" required />
-                    <span id="contact_err"></span>
-                </div>
-
-                <div class="mb-3">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" name="password" id="password" placeholder="Enter Your Password" onkeyup="validatePassword()" required />
-                    <span id="password_err"></span>
-                </div>
-                <div class="mb-3">
-                    <label for="confirm_password">Confirm Password</label>
-                    <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="Please Confirm Your Password" onkeyup="validateConfirmPassword()" required />
-                    <span id="confirm_password_err"></span>
-                </div>
-
-
-                <div class="mb-3">
-                    <label for="captcha">Enter Captcha</label><br />
-                    <input type="text" class="form-control" name="captcha" id="captcha" placeholder="Captcha Code From Below Image" required />
-                    <p class="mt-2">
-                        <img src="captcha.php?rand=<?php echo rand(); ?>" id="captcha_image" />
-                    </p>
-                    <p>Can't read the image?
-                        <a href='javascript: refreshCaptcha();'>click here</a>
-                        to refresh
-                    </p>
-                </div>
-
-                <div class="">
-                    <button type="submit" class="btn btn-primary" name="signup">
-                        Sign Up
-                    </button>
-                </div>
-                <p class="forgot-password text-right mt-2">
-                    Already have an account?
-                    <a href="login.php">sign in?</a>
-                </p>
-            </form>
-            <script>
-                function refreshCaptcha() {
-                    var img = document.images['captcha_image'];
-                    img.src = img.src.substring(
-                        0, img.src.lastIndexOf("?")
-                    ) + "?rand=" + Math.random() * 1000;
-                }
-            </script>
-            <script src="validate_client_side.js"></script>
-        </div>
-    </div>
-</div>
-<?php include_once('footer.php') ?>
+</html>

@@ -3,7 +3,7 @@
         <span class="secondary_color">About</span> US
     </h2>
     <p class="text-muted" style="text-align: justify" data-aos="fade-right">
-        The Universities around the globe have been creating knowledge for the society through research works. The society requires different domains of knowledge since its inception. As soon as human kind became modern, the search for knowledge started focusing on horizons of society. Our University has been trying to create knowledge and its dissemination among the scholars, academicians, experts, practitioners and graduates from home and abroad to promote the three mottos of the University viz. education, research and development.
+        The Journal is published under the faculty of Science and Engineering of Jatiya Kabi Kazi Nazrul Islam University. It is a peer reviewed International Journal and publishes articles with quality only. The objective of the Journal is to index itself to Scopus list.
     </p>
 
     <p class="text-muted text-justify" style="text-align: justify" data-aos="fade-right">
